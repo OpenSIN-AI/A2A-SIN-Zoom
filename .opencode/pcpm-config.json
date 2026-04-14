@@ -5,7 +5,7 @@
     "onFailure": "/Users/jeremy/dev/A2A-SIN-Zoom/.opencode/hooks/pcpm-after-run.sh"
   },
   "pcpm": {
-    "brainRepoPath": "/Users/jeremy/dev/A2A-SIN-Zoom",
+    "brainRepoPath": "/Users/jeremy/dev/global-brain",
     "projectId": "A2A-SIN-Zoom",
     "goalId": "default-goal",
     "goalDescription": "Continue development",
