@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenSIN-AI/OpenSIN-documentation/main/schemas/pr-watcher.json",
+  "version": "1.0.0",
+  "repo": "A2A-SIN-Zoom",
+  "team": "Team Messaging",
+  "enabled": true,
+  "triggers": {
+    "onPullRequest": {
+      "notify": true,
+      "channels": ["github", "telegram"],
+      "actions": ["security-scan", "code-quality-check"]
+    },
+    "onMerge": {
+      "notify": true,
+      "channels": ["github", "telegram"],
+      "actions": ["update-registry", "sync-fleet"]
+    }
+  },
+  "security": {
+    "scanForSecrets": true,
+    "scanForExternalCode": true,
+    "blockIfVulnerable": true
+  }
+}
