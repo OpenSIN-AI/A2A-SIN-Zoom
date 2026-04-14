@@ -1,35 +1,68 @@
-# Agent: A2A-SIN-Zoom
+# A2A-SIN-Zoom — AGENTS.md
 
-**Team:** OpenSIN-AI
-**Protocol:** A2A (Agent-to-Agent)
-**Status:** Active
-**Repository:** https://github.com/OpenSIN-AI/A2A-SIN-Zoom
+## Purpose
 
-## Capabilities
+Autonomous messaging agent operating within the Team Messaging ecosystem.
 
-A2A agent for Zoom integration within the OpenSIN ecosystem.
+## Rules
 
-## Communication
+- NEVER ask user for manual help — find your own way
+- ALWAYS use opencode CLI for LLM calls — never direct API calls
+- ALWAYS log errors to GitLab LogCenter — never leave logs locally
+- ALWAYS follow the Google account matrix for any Google operations
+- ALWAYS use sinInChrome for browser automation — never raw nodriver
 
-- **Input:** A2A messages from orchestrator
-- **Output:** A2A messages to other agents
-- **MCP:** Standard OpenSIN MCP servers
+## LLM Call Architecture
 
-## Security
+```python
+import subprocess, json
 
-- All operations logged to OpenSIN-Ledger
-- Requires authorization token
-- Guardrails enforced on all inputs/outputs
-
-## Setup
-
-```bash
-git clone https://github.com/OpenSIN-AI/A2A-SIN-Zoom.git
-cd A2A-SIN-Zoom
-npm install
-npm start
+def call_llm(prompt, timeout=120):
+    result = subprocess.run(
+        ["opencode", "run", prompt, "--format", "json"],
+        capture_output=True, text=True, timeout=timeout,
+    )
+    parts = []
+    for line in result.stdout.splitlines():
+        try:
+            ev = json.loads(line)
+            if ev.get("type") == "text":
+                parts.append(ev.get("part", {}).get("text", ""))
+        except json.JSONDecodeError:
+            pass
+    return "".join(parts).strip()
 ```
 
-## License
+**Model:** `opencode/qwen3.6-plus-free` + `--fallback opencode/minimax-m2.5-free`
 
-MIT
+## PARALLEL-EXPLORATION MANDATE (PRIORITY -4.5)
+
+Bei grossen Codebases (100k+ Zeilen, 1000+ Dateien) MUESSEN Agenten **5-10 parallele explore + 5-10 librarian-Agenten** starten.
+
+```
+task(subagent_type="explore", run_in_background=true, load_skills=[], description="Find APIs", prompt="[CONTEXT]: Grosse Codebase. [GOAL]: Alle API-Endpunkte. [REQUEST]: Dateipfade + Beschreibung.")
+task(subagent_type="explore", run_in_background=true, load_skills=[], description="Find Services", prompt="[CONTEXT]: Grosse Codebase. [GOAL]: Alle Services. [REQUEST]: Dateipfade + Methoden.")
+task(subagent_type="librarian", run_in_background=true, load_skills=[], description="Framework Docs", prompt="[GOAL]: Offizielle Doku. [REQUEST]: Best Practices.")
+```
+
+**HARTE REGELN:**
+1. `run_in_background=true` ist PFLICHT
+2. `load_skills=[]` ist PFLICHT
+3. WARTEN bis ALLE background-Agenten fertig sind
+4. Ergebnisse deduplizieren und zusammenfuehren
+
+## Subagenten-Modelle
+
+| Subagent | Modell | Fallback-Kette |
+|:---|:---|:---|
+| **explore** | `nvidia-nim/stepfun-ai/step-3.5-flash` | gemini-3-flash → gpt-5.4 → gemini-3.1-pro → claude-sonnet → qwen |
+| **librarian** | `nvidia-nim/stepfun-ai/step-3.5-flash` | gemini-3-flash → gpt-5.4 → gemini-3.1-pro → claude-sonnet → qwen |
+
+## Agent Config System v5
+
+- **Team:** Team Messaging
+- **Manager:** A2A-SIN-Messaging
+- **Config:** `my-sin-team-messaging.json`
+- **Team Register:** `oh-my-sin.json`
+
+→ [Full Documentation](https://github.com/OpenSIN-AI/OpenSIN-documentation/blob/main/docs/guide/agent-configuration.md)
