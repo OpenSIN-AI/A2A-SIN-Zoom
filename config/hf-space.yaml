@@ -1,0 +1,42 @@
+# Hugging Face Space Configuration
+# ALL A2A agents MUST use cpu-basic hardware (Always Free, unlimited)
+
+hardware:
+  flavor: cpu-basic
+  cost: 0
+  maxInstances: unlimited
+  
+  # Keep-alive configuration (prevents 48h sleep)
+  keepAlive:
+    enabled: true
+    intervalMinutes: 5
+    endpoint: "/health"
+    method: "GET"
+    expectedStatus: 200
+  
+  # Docker configuration
+  docker:
+    baseImage: "node:22-slim"
+    port: 8000
+    env:
+      - NODE_ENV=production
+      - PORT=8000
+  
+  # Health checks
+  health:
+    endpoint: "/health"
+    interval: 60
+    timeout: 10
+    retries: 3
+  
+  # Resource limits
+  resources:
+    cpu: 2
+    memory: 4Gi
+    ephemeralStorage: 10Gi
+  
+  # Scaling
+  scaling:
+    minReplicas: 1
+    maxReplicas: 1
+    targetCPUUtilization: 80
