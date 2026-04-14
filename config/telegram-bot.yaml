@@ -1,0 +1,41 @@
+# Telegram Bot Configuration
+# This agent has its own dedicated Telegram bot for operator communication.
+# Bot token is stored in SIN-Passwordmanager, never commit actual tokens.
+
+telegram:
+  enabled: true
+  botAlias: "sin-sin-zoom"
+  tokenEnv: "TELEGRAM_BOT_TOKEN"
+  webhookEnabled: false
+  pollingInterval: 1000
+  
+  # Message routing
+  routes:
+    onMessage: "src/telegram/handler.ts"
+    onCommand: "src/telegram/commands.ts"
+    onError: "src/telegram/error-handler.ts"
+  
+  # Commands
+  commands:
+    - command: "/status"
+      description: "Check agent health status"
+    - command: "/logs"
+      description: "View recent logs"
+    - command: "/restart"
+      description: "Restart agent (requires confirmation)"
+    - command: "/help"
+      description: "Show available commands"
+  
+  # Notification settings
+  notifications:
+    onAgentStart: true
+    onAgentStop: true
+    onError: true
+    onRateLimit: true
+    onTaskComplete: true
+  
+  # Security
+  security:
+    allowedChatIds:
+      - env: "TELEGRAM_ALLOWED_CHAT_IDS"
+    requireAuth: true
