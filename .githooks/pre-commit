@@ -1,0 +1,32 @@
+#!/bin/bash
+# Pre-commit hook: Secret detection + External code scanning
+# Prevents secrets and external source code references from being committed
+
+echo "🔒 Running pre-commit security checks..."
+
+# 1. Detect secrets
+if command -v detect-secrets &> /dev/null; then
+    detect-secrets scan --baseline .secrets.baseline
+    if [ $? -ne 0 ]; then
+        echo "❌ Potential secrets detected! Commit blocked."
+        echo "   Remove secrets or add to .secrets.baseline with: detect-secrets audit"
+        exit 1
+    fi
+fi
+
+# 2. Check for external source code references (Claude, Anthropic, etc.)
+if grep -r "claude\|anthropic\|@ant/" --include="*.ts" --include="*.py" --include="*.js" . 2>/dev/null | grep -v "node_modules" | grep -v ".git"; then
+    echo "❌ External source code references detected! Commit blocked."
+    echo "   Remove all references to claude, anthropic, or @ant/ packages."
+    exit 1
+fi
+
+# 3. Check for hardcoded API keys
+if grep -r "sk-[a-zA-Z0-9]\{20,\}\|Bearer [a-zA-Z0-9]\{20,\}\|api_key=[a-zA-Z0-9]\{20,\}" --include="*.ts" --include="*.py" --include="*.js" --include="*.json" . 2>/dev/null | grep -v "node_modules" | grep -v ".git" | grep -v "example"; then
+    echo "❌ Hardcoded API keys detected! Commit blocked."
+    echo "   Use environment variables or .env files instead."
+    exit 1
+fi
+
+echo "✅ Pre-commit security checks passed."
+exit 0
