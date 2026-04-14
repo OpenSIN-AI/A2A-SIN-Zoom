@@ -1,46 +1,39 @@
 # A2A-SIN-Zoom
 
-> A2A agent integration for Zoom messaging platform.
+Autonomous messaging agent for OpenSIN-AI.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/OpenSIN-AI/A2A-SIN-Zoom)](https://github.com/OpenSIN-AI/A2A-SIN-Zoom)
+## Purpose
 
-## Overview
+Specialized messaging agent operating within the OpenSIN-AI ecosystem.
 
-A2A (Agent-to-Agent) integration for Zoom. Part of the OpenSIN-AI ecosystem.
+## Agent Configuration
 
-## Quick Start
+| Property | Value |
+|:---|:---|
+| **Team** | Team Messaging |
+| **Manager** | A2A-SIN-Messaging |
+| **Type** | Messaging Agent |
+| **Primary Model** | `gemini-3-flash` |
 
-```bash
-git clone https://github.com/OpenSIN-AI/A2A-SIN-Zoom.git
-cd A2A-SIN-Zoom
-npm install
-npm start
-```
+### Subagenten-Modelle (oh-my-openagent.json)
 
-## Features
+| Subagent | Modell |
+|:---|:---|
+| **explore** | `nvidia-nim/stepfun-ai/step-3.5-flash` |
+| **librarian** | `nvidia-nim/stepfun-ai/step-3.5-flash` |
 
-- A2A protocol support
-- Zoom messaging integration
-- Automated agent communication
-- OpenSIN MCP server compatibility
+## Agent Config System v5
 
-## Architecture
+This agent is registered in the central team system:
+- **Team Register:** `oh-my-sin.json` → `team-messaging`
+- **Team Config:** `my-sin-team-messaging.json`
 
-This agent connects to the OpenSIN orchestrator via A2A protocol and handles Zoom messaging operations.
+### PARALLEL-EXPLORATION MANDATE
 
-## Contributing
+Bei grossen Codebases (100k+ Zeilen) MUSS der Agent **5-10 parallele explore + 5-10 librarian-Agenten** starten.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+→ [Full Documentation](https://github.com/OpenSIN-AI/OpenSIN-documentation/blob/main/docs/guide/agent-configuration.md)
 
 ## License
 
-MIT — See [LICENSE](LICENSE).
-
-## 📚 Documentation
-
-This repository follows the [Global Dev Docs Standard](https://github.com/OpenSIN-AI/Global-Dev-Docs-Standard).
-
-For contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
-For security policy, see [SECURITY.md](SECURITY.md).
-For the complete OpenSIN ecosystem, see [OpenSIN-AI Organization](https://github.com/OpenSIN-AI).
+MIT
