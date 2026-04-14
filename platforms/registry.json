@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenSIN-AI/OpenSIN-documentation/main/schemas/platform-registry.json",
+  "version": "1.0.0",
+  "repo": "A2A-SIN-Zoom",
+  "team": "Team Messaging",
+  "platforms": {},
+  "inboundIntake": {
+    "enabled": true,
+    "n8nWorkflow": "n8n-workflows/inbound-intake.json",
+    "workItemSchema": "https://raw.githubusercontent.com/OpenSIN-AI/OpenSIN-documentation/main/schemas/work-item.json"
+  }
+}
