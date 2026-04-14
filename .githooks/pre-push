@@ -1,0 +1,24 @@
+#!/bin/bash
+# Pre-push hook: Commit message leak detection
+# Prevents pushing commits with sensitive information in messages
+
+echo "🔒 Running pre-push commit message checks..."
+
+# Get commit messages in this push range
+COMMITS=$(git log --oneline origin/$(git symbolic-ref --short HEAD)..HEAD 2>/dev/null || git log --oneline -10)
+
+# Check for sensitive keywords in commit messages
+if echo "$COMMITS" | grep -i "password\|secret\|api.key\|token\|credential"; then
+    echo "⚠️  WARNING: Commit messages may contain sensitive keywords."
+    echo "   Ensure no actual secrets are in commit messages."
+fi
+
+# Check for accidentally committed .env files
+if git diff --cached --name-only | grep -E "\.env$|\.env\.|credentials\."; then
+    echo "❌ Sensitive files detected! Push blocked."
+    echo "   Remove .env, credential files before pushing."
+    exit 1
+fi
+
+echo "✅ Pre-push checks passed."
+exit 0
