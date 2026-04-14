@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/OpenSIN-AI/OpenSIN-documentation/main/schemas/github-app-routing.json",
+  "version": "1.0.0",
+  "githubBot": {
+    "enabled": true,
+    "appSlug": "ZOOM-bot",
+    "botName": "A2A-SIN-Zoom Bot",
+    "appIdEnv": "ZOOM_APP_ID",
+    "clientIdEnv": "ZOOM_CLIENT_ID",
+    "privateKeyEnv": "ZOOM_PRIVATE_KEY",
+    "webhookSecretEnv": "ZOOM_WEBHOOK_SECRET"
+  },
+  "routing": {
+    "onIssue": {"handler": "issues.ts", "enabled": true},
+    "onPullRequest": {"handler": "prs.ts", "enabled": true},
+    "onComment": {"handler": "comments.ts", "enabled": true}
+  }
+}
