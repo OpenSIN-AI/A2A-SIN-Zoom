@@ -26,9 +26,9 @@
   },
   "deployment": {
     "workforceIndex": "team-messaging",
-    "landingPage": "https://a2a.delqhi.com/agents/a2a-sin-zoom",
-    "publicA2A": "https://a2a.delqhi.com/a2a/v1/a2a-sin-zoom",
-    "cimdAnchor": "https://a2a.delqhi.com/agents/a2a-sin-zoom",
+    "landingPage": "https://chat.opensin.ai/agents/a2a-sin-zoom",
+    "publicA2A": "https://chat.opensin.ai/a2a/v1/a2a-sin-zoom",
+    "cimdAnchor": "https://chat.opensin.ai/agents/a2a-sin-zoom",
     "vmServer": "hf-cpu-basic"
   }
 }
