@@ -1,31 +1,9 @@
 {
-  "$schema": "https://raw.githubusercontent.com/OpenSIN-AI/OpenSIN-documentation/main/schemas/repo-governance.json",
-  "version": "1.0.0",
+  "version": "1.0",
   "repo": "A2A-SIN-Zoom",
-  "team": "Team Messaging",
   "rules": {
-    "branchProtection": {
-      "requirePullRequest": true,
-      "requireReviews": true,
-      "dismissStaleReviews": true,
-      "requireCodeOwnerReview": true
-    },
-    "commitMessage": {
-      "requireConventionalCommits": true,
-      "allowedTypes": ["feat", "fix", "docs", "style", "refactor", "test", "chore", "security"]
-    },
-    "security": {
-      "requirePreCommitHook": true,
-      "requirePrePushHook": true,
-      "requireSecretsBaseline": true,
-      "requireSourceCodeClassification": true,
-      "zeroExternalCodePolicy": true
-    }
-  },
-  "labels": {
-    "bug": "Something isn't working",
-    "enhancement": "New feature or request",
-    "documentation": "Documentation improvements",
-    "security": "Security-related changes"
+    "require-pr-watcher": true,
+    "require-visual-evidence": true,
+    "fail-closed": true
   }
 }
