@@ -1,10 +1,10 @@
 # A2A-SIN-Zoom
 
-Autonomous messaging agent for OpenSIN-AI.
+Autonomous Zoom meeting and chat integration agent for OpenSIN-AI.
 
 ## Purpose
 
-Specialized messaging agent operating within the OpenSIN-AI ecosystem.
+Specialized Zoom meeting and chat integration agent operating within the OpenSIN-AI ecosystem.
 
 ## Agent Configuration
 
@@ -36,4 +36,4 @@ Bei grossen Codebases (100k+ Zeilen) MUSS der Agent **5-10 parallele explore + 5
 
 ## License
 
-MIT
+Apache-2.0

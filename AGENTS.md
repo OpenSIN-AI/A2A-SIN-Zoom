@@ -2,15 +2,15 @@
 
 ## Purpose
 
-Autonomous messaging agent operating within the Team Messaging ecosystem.
+Autonomous Zoom meeting and chat integration agent operating within the Team Messaging ecosystem.
 
 ## Rules
 
 - NEVER ask user for manual help — find your own way
 - ALWAYS use opencode CLI for LLM calls — never direct API calls
-- ALWAYS log errors to GitLab LogCenter — never leave logs locally
+- ALWAYS log errors to the approved artifact storage surface — never leave logs locally
 - ALWAYS follow the Google account matrix for any Google operations
-- ALWAYS use sinInChrome for browser automation — never raw nodriver
+- ALWAYS use the approved OpenSIN browser automation surfaces — never raw nodriver
 
 ## LLM Call Architecture
 
@@ -66,3 +66,16 @@ task(subagent_type="librarian", run_in_background=true, load_skills=[], descript
 - **Team Register:** `oh-my-sin.json`
 
 → [Full Documentation](https://github.com/OpenSIN-AI/OpenSIN-documentation/blob/main/docs/guide/agent-configuration.md)
+
+## Boundary Guidance
+
+When modifying this repo:
+
+- Prefer Zoom meeting, chat, and session-support work.
+- Do not turn this repo into a generic messaging bucket.
+- Do not redefine organization docs, architecture, runtime canon, or non-Zoom ownership here.
+- Move non-Zoom behavior back to the repos that own those surfaces.
+
+## License
+
+Apache-2.0
