@@ -66,3 +66,11 @@ task(subagent_type="librarian", run_in_background=true, load_skills=[], descript
 - **Team Register:** `oh-my-sin.json`
 
 → [Full Documentation](https://github.com/OpenSIN-AI/OpenSIN-documentation/blob/main/docs/guide/agent-configuration.md)
+
+## Boundary Guidance for Agents
+
+When modifying this repo:
+
+- Prefer Zoom integration work.
+- Keep claims scoped to this integration surface.
+- Do not redefine broader collaboration, product, ops, or docs canon from here.
